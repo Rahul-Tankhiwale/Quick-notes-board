@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Quick Notes Board — Starter</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Keep CSS basic -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="wrap">
+    <h1>Quick Notes Board</h1>
+
+    <!-- Form -->
+    <section class="panel">
+      <form id="note-form">
+        <div class="row">
+          <label for="title">Title</label>
+          <input id="title" name="title" type="text" placeholder="e.g., Groceries">
+          <div id="title-error" class="error"></div>
+        </div>
+
+        <div class="row">
+          <label for="text">Text</label>
+          <textarea id="text" name="text" rows="3" placeholder="e.g., Buy milk, bread..."></textarea>
+        </div>
+
+        <div class="actions">
+          <button type="submit" id="submit-btn">Add Note</button>
+          <button type="button" id="cancel-edit" class="hidden">Cancel Edit</button>
+        </div>
+
+        <!-- Track edit mode -->
+        <input type="hidden" id="editing-id" value="">
+      </form>
+    </section>
+
+    <!-- Filter -->
+    <section class="panel">
+      <label for="filter">Filter notes (by title or text):</label>
+      <input id="filter" type="search" placeholder="Type to filter...">
+    </section>
+
+    <!-- Notes list -->
+    <section id="notes" aria-live="polite" class="board">
+      <p class="muted">No notes yet. Add one above.</p>
+    </section>
+  </main>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
