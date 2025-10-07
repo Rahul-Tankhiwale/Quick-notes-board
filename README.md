@@ -1,5 +1,3 @@
-﻿# Quick-notes-board
-
 # 🗒️ Quick Notes Board
 
 A lightweight, responsive web app for creating and managing notes directly in your browser — no sign-up, no database, just instant productivity!
@@ -23,3 +21,4 @@ Quick Notes Board helps users jot down quick ideas, reminders, or tasks using a 
 
 ## 📄 License
 MIT License
+
