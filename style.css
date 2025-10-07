@@ -1,98 +1,230 @@
-/* Basic styles only */
+/* -------------------------------
+   Quick Notes Board — Modern UI
+   Author: Rahul Tankhiwale
+---------------------------------- */
 
-body {
-  font-family: Arial, Helvetica, sans-serif;
-  margin: 0;
-  padding: 16px;
-  background: #f5f5f5;
-  color: #222;
+/* Google Font */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap");
+
+:root {
+  --bg: #0f0f10;
+  --panel: rgba(255, 255, 255, 0.08);
+  --accent: #6c63ff;
+  --accent2: #ff4ecd;
+  --text: #fff;
+  --muted: #999;
+  --shadow: rgba(0, 0, 0, 0.4);
 }
 
+/* Base */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background: radial-gradient(circle at top left, #141414, #000);
+  color: var(--text);
+  padding: 40px 20px;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* ✨ Animated Gradient Glow Background */
+body::before {
+  content: "";
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(
+    from 90deg,
+    var(--accent),
+    var(--accent2),
+    #00e5ff,
+    var(--accent)
+  );
+  animation: spin 15s linear infinite;
+  filter: blur(120px);
+  z-index: -1;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Layout */
 .wrap {
-  max-width: 860px;
+  max-width: 900px;
   margin: 0 auto;
 }
 
+/* Header */
 h1 {
-  font-size: 22px;
-  margin: 0 0 12px 0;
+  text-align: center;
+  font-size: 2.2rem;
+  margin-bottom: 24px;
+  letter-spacing: 1px;
+  color: var(--accent);
+  text-shadow: 0 0 20px var(--accent2);
 }
 
+/* Panel (Form + Filter sections) */
 .panel {
-  background: #ffffff;
-  border: 1px solid #ddd;
-  padding: 12px;
-  border-radius: 6px;
-  margin-bottom: 12px;
+  background: var(--panel);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 20px;
+  border-radius: 16px;
+  margin-bottom: 20px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 4px 20px var(--shadow);
+  transition: 0.3s ease;
 }
 
-.row { margin-bottom: 10px; }
+.panel:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(255, 255, 255, 0.1);
+}
 
 label {
   display: block;
-  font-weight: bold;
-  margin-bottom: 4px;
+  font-weight: 600;
+  margin-bottom: 6px;
 }
 
 input[type="text"],
 input[type="search"],
 textarea {
   width: 100%;
-  padding: 8px;
+  padding: 10px 12px;
   font-size: 14px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text);
+  outline: none;
+  transition: 0.3s ease;
 }
 
-.actions { display: flex; gap: 8px; }
+input:focus,
+textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 8px var(--accent);
+}
 
+/* Buttons */
 button {
-  padding: 8px 12px;
-  border: 1px solid #bbb;
-  background: #eee;
-  border-radius: 4px;
+  padding: 10px 18px;
+  border-radius: 30px;
+  font-weight: 600;
+  border: none;
   cursor: pointer;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: white;
+  transition: 0.3s ease;
 }
 
-button#submit-btn {
-  background: #0077cc;
-  color: #fff;
-  border-color: #0077cc;
+button:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 0 15px var(--accent);
 }
 
-.hidden { display: none; }
+button#cancel-edit {
+  background: rgba(255, 255, 255, 0.2);
+  color: var(--text);
+}
 
+button#cancel-edit:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Error + muted */
 .error {
-  color: #b00020;
+  color: #ff7070;
   font-size: 12px;
   margin-top: 4px;
 }
 
-.muted { color: #666; font-size: 14px; }
+.muted {
+  color: var(--muted);
+  text-align: center;
+}
 
-/* Notes board */
+/* Board Grid */
 .board {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 8px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
 }
 
-/* Card */
+/* Note Cards */
 .note {
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  padding: 10px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  transition: transform 0.4s ease, box-shadow 0.3s ease;
+  backdrop-filter: blur(10px);
+  perspective: 1000px;
 }
 
+.note:hover {
+  transform: rotateY(10deg) translateY(-5px);
+  box-shadow: 0 15px 40px rgba(255, 255, 255, 0.2);
+}
+
+/* Note Text */
 .note h3 {
-  margin: 0 0 6px 0;
-  font-size: 16px;
+  font-size: 1.1rem;
+  color: #fff;
+  margin-bottom: 6px;
+  text-shadow: 0 0 5px var(--accent);
 }
 
 .note p {
-  margin: 0 0 8px 0;
-  font-size: 14px;
+  font-size: 0.95rem;
+  color: #eee;
+  margin-bottom: 10px;
+  line-height: 1.4;
 }
 
-.note .note-actions { display: flex; gap: 6px; }
+/* Note Actions */
+.note-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.note-actions button {
+  padding: 6px 12px;
+  font-size: 0.8rem;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #3b82f6, #06b6d4);
+}
+
+.note-actions .delete-btn {
+  background: linear-gradient(135deg, #f43f5e, #ef4444);
+}
+
+.note-actions button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .panel {
+    padding: 14px;
+  }
+
+  h1 {
+    font-size: 1.6rem;
+  }
+}
